@@ -22,7 +22,7 @@
 .contacts-grid b{display:flex;align-items:center;gap:12px;line-height:1.25;font-weight:700}.contact-pill{width:48px;height:48px;flex:0 0 48px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;color:#fff;background:#102833;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}.contact-pill-phone{background:#102833}.contact-pill-mail{background:#f4b400}.contact-pill-wa{width:54px;height:54px;flex-basis:54px;padding:0;background:transparent;box-shadow:none}.contact-pill-wa svg{width:54px;height:54px;display:block}.contact-pill-2gis{background:#0a76ff;font-size:11px;letter-spacing:.02em}.contacts-grid .whatsapp-card b{justify-content:center;gap:14px}.contacts-grid .whatsapp-card .contact-pill-wa{animation:wa-flicker 2.4s ease-in-out infinite}.contacts-grid .whatsapp-card:hover .contact-pill-wa{animation:wa-flicker-hover .9s ease-in-out infinite}.footer-main{font-size:15px}.footer-main a,.footer-main div{line-height:1.45}.footer-main a{font-size:15px;font-weight:600}.footer-bottom{font-size:12px;align-items:center}.footer-bottom span{position:relative;top:-4px}
 @media(max-width:580px){.contacts-grid b{font-size:15px}.contact-logo{width:42px;height:42px;flex-basis:42px}.contact-logo-wa{width:46px;height:46px;flex-basis:46px}}
 
-@keyframes hero-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}@keyframes logo-breathe{0%,100%{box-shadow:0 0 0 0 rgba(213,236,66,0)}50%{box-shadow:0 0 0 7px rgba(213,236,66,.12)}}@keyframes scroll-line{0%,100%{transform:scaleX(.35);opacity:.5}50%{transform:scaleX(1);opacity:1}}@keyframes whatsapp-pulse{0%,100%{box-shadow:0 8px 30px rgba(0,0,0,.22),0 0 0 0 rgba(37,211,102,.25)}50%{box-shadow:0 8px 30px rgba(0,0,0,.22),0 0 0 10px rgba(37,211,102,0)}}
+@keyframes hero-rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}@keyframes logo-breathe{0%,100%{box-shadow:0 0 0 0 rgba(242,106,33,0)}50%{box-shadow:0 0 0 7px rgba(242,106,33,.18)}}@keyframes scroll-line{0%,100%{transform:scaleX(.35);opacity:.5}50%{transform:scaleX(1);opacity:1}}@keyframes whatsapp-pulse{0%,100%{box-shadow:0 8px 30px rgba(0,0,0,.22),0 0 0 0 rgba(37,211,102,.25)}50%{box-shadow:0 8px 30px rgba(0,0,0,.22),0 0 0 10px rgba(37,211,102,0)}}
 @media(prefers-reduced-motion:reduce){.hero-bg{transform:scale(1.01)!important}.hero-content>*,.hero-facts,.logo-mark,.hero-scroll span,.whatsapp{opacity:1;transform:none;animation:none}.motion-item{opacity:1;transform:none;transition:none}.magnetic{transform:none}}
 
 /* OBT content refinements */
@@ -36,8 +36,8 @@
 
 /* Polished page progress */
 .scroll-progress{height:5px;background:rgba(255,255,255,.1);box-shadow:0 1px 0 rgba(255,255,255,.06);pointer-events:none}
-.scroll-progress span{position:relative;border-radius:0 999px 999px 0;background:linear-gradient(90deg,#a9ce2c 0%,var(--accent) 58%,#efff86 100%);box-shadow:0 0 12px rgba(213,236,66,.55);transition:width .08s linear}
-.scroll-progress span::after{content:'';position:absolute;right:-5px;top:50%;width:10px;height:10px;border:2px solid rgba(255,255,255,.9);border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(213,236,66,.16),0 2px 9px rgba(0,0,0,.25);transform:translateY(-50%)}
+.scroll-progress span{position:relative;border-radius:0 999px 999px 0;background:linear-gradient(90deg,rgb(217,79,16) 0%,var(--accent) 58%,rgb(255,178,127) 100%);box-shadow:0 0 12px rgba(242,106,33,.55);transition:width .08s linear}
+.scroll-progress span::after{content:'';position:absolute;right:-5px;top:50%;width:10px;height:10px;border:2px solid rgba(255,255,255,.9);border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(242,106,33,.2),0 2px 9px rgba(0,0,0,.25);transform:translateY(-50%)}
 @media(max-width:580px){.scroll-progress{height:3px}.scroll-progress span::after{right:-4px;width:8px;height:8px;border-width:1px}}
 @media(prefers-reduced-motion:reduce){.scroll-progress span{transition:none}}
 
@@ -214,4 +214,28 @@ html.js body.page-leaving {
     filter: none;
     transition: none;
   }
+}
+
+/* Orange accent palette */
+:root {
+  --accent: rgb(242, 106, 33);
+}
+
+.button-primary:hover {
+  background: rgb(255, 138, 77);
+}
+
+@keyframes logo-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(242, 106, 33, 0); }
+  50% { box-shadow: 0 0 0 7px rgba(242, 106, 33, .18); }
+}
+
+.scroll-progress span {
+  background: linear-gradient(90deg, rgb(217, 79, 16) 0%, rgb(242, 106, 33) 58%, rgb(255, 178, 127) 100%);
+  box-shadow: 0 0 12px rgba(242, 106, 33, .55);
+}
+
+.scroll-progress span::after {
+  background: rgb(242, 106, 33);
+  box-shadow: 0 0 0 3px rgba(242, 106, 33, .2), 0 2px 9px rgba(0, 0, 0, .25);
 }
