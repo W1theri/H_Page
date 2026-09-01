@@ -9,6 +9,37 @@ const body = document.body;
 const navLinks = document.querySelectorAll('a[href^="#"]');
 const transitionDuration = 420;
 let ticking = false;
+let transitionTimer;
+let menuCloseTimer;
+
+function setMenuState(open) {
+  if (!nav || !menuButton) return;
+
+  window.clearTimeout(menuCloseTimer);
+
+  if (open) {
+    nav.classList.remove('is-closing');
+    nav.classList.add('open');
+    body.classList.remove('menu-closing');
+    body.classList.add('menu-open');
+  } else if (nav.classList.contains('open')) {
+    nav.classList.add('is-closing');
+    body.classList.add('menu-closing');
+    menuCloseTimer = window.setTimeout(finishMenuClose, 480);
+  }
+
+  menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.setAttribute('aria-label', open ? 'Р—Р°РєСЂС‹С‚СЊ РјРµРЅСЋ' : 'РћС‚РєСЂС‹С‚СЊ РјРµРЅСЋ');
+}
+
+function finishMenuClose() {
+  nav.classList.remove('open', 'is-closing');
+  body.classList.remove('menu-open', 'menu-closing');
+}
+
+function closeMenu() {
+  setMenuState(false);
+}
 
 function revealPage() {
   requestAnimationFrame(() => {
@@ -45,10 +76,7 @@ function navigateToSection(link, target) {
   const hash = link.getAttribute('href');
   if (!hash || hash === '#') return;
 
-  if (nav && nav.classList.contains('open')) {
-    nav.classList.remove('open');
-    menuButton.setAttribute('aria-expanded', 'false');
-  }
+  closeMenu();
 
   const scrollTarget = getScrollTarget(target);
   history.pushState(null, '', hash);
@@ -59,7 +87,8 @@ function navigateToSection(link, target) {
   }
 
   body.classList.add('page-leaving');
-  window.setTimeout(() => {
+  window.clearTimeout(transitionTimer);
+  transitionTimer = window.setTimeout(() => {
     window.scrollTo({ top: scrollTarget, behavior: 'auto' });
     requestAnimationFrame(() => {
       body.classList.remove('page-leaving');
@@ -74,15 +103,21 @@ revealPage();
 onScroll();
 
 menuButton.addEventListener('click', () => {
-  const open = nav.classList.toggle('open');
-  menuButton.setAttribute('aria-expanded', open);
-  menuButton.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+  setMenuState(!nav.classList.contains('open'));
 });
 
-nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-  nav.classList.remove('open');
-  menuButton.setAttribute('aria-expanded', 'false');
-}));
+document.addEventListener('click', event => {
+  if (!nav.classList.contains('open')) return;
+  if (!nav.contains(event.target) && !menuButton.contains(event.target)) closeMenu();
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeMenu();
+});
+
+nav.addEventListener('animationend', event => {
+  if (event.animationName === 'drawer-out') finishMenuClose();
+});
 
 navLinks.forEach(link => {
   link.addEventListener('click', event => {
@@ -136,6 +171,6 @@ if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
 contactForm.addEventListener('submit', event => {
   event.preventDefault();
   const status = event.currentTarget.querySelector('.form-status');
-  status.textContent = 'Спасибо! Заявка принята. Мы свяжемся с вами в ближайшее время.';
+  status.textContent = 'РЎРїР°СЃРёР±Рѕ! Р—Р°СЏРІРєР° РїСЂРёРЅСЏС‚Р°. РњС‹ СЃРІСЏР¶РµРјСЃСЏ СЃ РІР°РјРё РІ Р±Р»РёР¶Р°Р№С€РµРµ РІСЂРµРјСЏ.';
   event.currentTarget.reset();
 });
