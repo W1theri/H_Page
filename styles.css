@@ -184,3 +184,34 @@
   .contact-logo-wa{width:46px;height:46px;}
 }
 `r`n/* Final contact and icon alignment */`r`n.line-icon, .service-icon {`r`n  display: inline-flex;`r`n  align-items: center;`r`n  justify-content: center;`r`n  width: 1.2em;`r`n  height: 1.2em;`r`n  line-height: 1;`r`n  vertical-align: middle;`r`n}`r`n`r`n.contacts-grid a {`r`n  align-content: center;`r`n}`r`n`r`n.contacts-grid b {`r`n  display: flex;`r`n  align-items: center;`r`n  justify-content: center;`r`n  gap: 12px;`r`n  line-height: 1.2;`r`n}`r`n`r`n.contacts-grid a[href^="tel:"] b,`r`n.contacts-grid a[href^="mailto:"] b,`r`n.contacts-grid a.whatsapp-card b,`r`n.contacts-grid a[href*="2gis"] b {`r`n  justify-content: center;`r`n}`r`n`r`n.contact-logo {`r`n  display: block;`r`n  object-fit: contain;`r`n  flex: 0 0 auto;`r`n}`r`n`r`n.contact-logo-phone,`r`n.contact-logo-mail,`r`n.contact-logo-2gis {`r`n  width: 48px;`r`n  height: 48px;`r`n}`r`n`r`n.contact-logo-wa {`r`n  width: 52px;`r`n  height: 52px;`r`n}`r`n`r`n.contacts-grid .whatsapp-card,`r`n.contacts-grid .whatsapp-card:hover {`r`n  background: transparent !important;`r`n  color: inherit !important;`r`n}`r`n`r`n.contacts-grid .whatsapp-card .contact-logo-wa,`r`n.contacts-grid .whatsapp-card:hover .contact-logo-wa {`r`n  animation: none !important;`r`n  filter: none !important;`r`n  transform: none !important;`r`n}`r`n`r`n@media (max-width: 580px) {`r`n  .contact-logo-phone,`r`n  .contact-logo-mail,`r`n  .contact-logo-2gis {`r`n    width: 42px;`r`n    height: 42px;`r`n  }`r`n`r`n  .contact-logo-wa {`r`n    width: 46px;`r`n    height: 46px;`r`n  }`r`n}`r`n
+
+/* Section transition fade */
+html.js body {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(5px);
+  transition: opacity .42s ease, transform .42s ease, filter .42s ease;
+}
+
+html.js body.is-ready {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+html.js body.page-leaving {
+  opacity: 0;
+  transform: translateY(-8px);
+  filter: blur(5px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js body,
+  html.js body.is-ready,
+  html.js body.page-leaving {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
